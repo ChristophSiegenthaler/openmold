@@ -1,0 +1,21 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+# results and project data never belong in this repo
+runs/
+*.step
+*.stp
+*.STEP
+*.STP
+*.brep
+*.msh
+*.frd
+*.npz
+*.npy
+*.stl
+*.ply
+*.udb
+*.pdf
+local/

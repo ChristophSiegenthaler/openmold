@@ -1,0 +1,41 @@
+# Runs in a few minutes. First create the parts:  python examples/make_demo_parts.py examples/local
+project: {name: Demo box, output: local/run}
+parts:
+  - {id: solid, step: local/demo_solid.step, label: Solid corner columns}
+  - {id: hollow, step: local/demo_hollow.step, label: Cored corner columns}
+material: generic_tpu_65d
+demould_axis: [0, 1, 0]
+gates:
+  - {point: [0, 0, 0], radius: 1.5}
+process:
+  fill_time: 1.0
+  eject_times: [25]
+mesh: {fill: 1.5, thermal: 0.8, warp: 2.5, surface: 2.0}
+thickness: {samples: 100000, sample_radius: 0.2}
+cooling:
+  steps: [[0.5, 4], [2, 26], [5, 40]]
+  htc_zones:
+    - name: Core pins
+      htc: 500
+      cylinders:
+        - {base: [25, 0, 15], axis: [0, 1, 0], radius: 2.6, start: 3, length: 30}
+        - {base: [25, 0, -15], axis: [0, 1, 0], radius: 2.6, start: 3, length: 30}
+        - {base: [-25, 0, 15], axis: [0, 1, 0], radius: 2.6, start: 3, length: 30}
+        - {base: [-25, 0, -15], axis: [0, 1, 0], radius: 2.6, start: 3, length: 30}
+  report_times: [20, 30]
+fill:
+  air_trap_exclude:
+    - {min: [null, 29.5, null]}   # the rim is the parting line, so it can vent
+warp:
+  flatness:
+    - {name: rim, box: {min: [null, 29.9, null]}, normal: [0, 1, 0]}
+    - {name: floor, box: {max: [null, 0.1, null]}, normal: [0, 1, 0]}
+  bows:
+    - {name: long_wall, mid: [0, 30, 20], ref: [25, 30, 20], direction: [0, 0, 1]}
+  lateral:
+    - {name: column_top, points: [[25, 30, 15], [-25, 30, 15], [25, 30, -15], [-25, 30, -15]], plane_normal: [0, 1, 0]}
+exports: {parts: [hollow], scales: [1, 20]}
+plots:
+  section: {origin: [25, 0, 0], normal: [1, 0, 0]}
+  detail: {center: [25, 15, 15], radius: 16}
+report: {title: Demo box with solid and cored corner columns}

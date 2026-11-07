@@ -1,0 +1,23 @@
+# Generic values for a hard (about 65 Shore D) polyether TPU. Estimates, not measured data.
+# Good for ranking design variants. Replace with a measured card for absolute numbers.
+name: Generic TPU, 65 Shore D
+source: Generic literature-style estimates, not measured
+measured: false
+density: 1173          # kg/m3, solid
+flow:
+  model: cross         # eta = eta0 / (1 + (eta0*rate/tau)^(1-n)), isothermal at melt temperature
+  eta0: 1500           # Pa.s
+  tau: 50000           # Pa
+  n: 0.35
+thermal:
+  conductivity: 0.22   # W/m.K, or a table [[T_C, value], ...]
+  specific_heat: 1900  # J/kg.K, or a table [[T_C, value], ...]
+  no_flow_temp: 160    # C, used as "solid"
+  eject_temp: 80       # C
+mechanical:
+  youngs_modulus: 900  # MPa. Does not affect displacement in this model, only stress.
+  poisson: 0.45
+  expansion: 1.4e-4    # 1/K, solid
+shrinkage:
+  sink_volumetric: 0.06  # uncompensated volume shrink of melt still molten after packing
+recommended_draft_deg: 2.0

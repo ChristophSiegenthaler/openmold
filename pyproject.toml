@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openmold"
+version = "0.1.0"
+description = "Injection-moulding comparison pipeline built on gmsh, CalculiX and a simple fill solver"
+license = {text = "GPL-3.0-or-later"}
+requires-python = ">=3.10"
+dependencies = ["numpy", "scipy", "matplotlib", "meshio", "gmsh>=4.11", "pyvista", "trimesh", "rtree", "pyyaml"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+openmold = "openmold.cli:main"
+
+[tool.setuptools]
+packages = ["openmold"]
+
+[tool.setuptools.package-data]
+openmold = ["assets/*", "materials/*.yaml"]
+
+[tool.pytest.ini_options]
+markers = ["solver: needs the ccx binary (CalculiX)"]

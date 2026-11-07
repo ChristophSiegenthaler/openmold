@@ -1,0 +1,27 @@
+# Copy this file, fill it in, and point `material:` in your project config at the copy.
+# Keep cards with restricted data (for example lab reports) outside this repository.
+name: Grade name
+source: Where the data comes from
+measured: true
+density: 1000          # kg/m3, solid
+flow:
+  model: cross_wlf     # or "cross" with eta0, tau, n
+  n: 0.3
+  tau: 100000          # Pa
+  D1: 1.0e+14          # Pa.s
+  D2: 373.15           # K
+  D3: 0                # K/Pa, ignored because the fill is solved at zero pressure dependence
+  A1: 30.0
+  A2: 51.6             # K
+thermal:
+  conductivity: [[50, 0.2], [200, 0.2]]    # [[T_C, W/m.K], ...] ascending, or a single number
+  specific_heat: [[50, 1800], [200, 2300]] # [[T_C, J/kg.K], ...] ascending, or a single number
+  no_flow_temp: 120    # C
+  eject_temp: 90       # C
+mechanical:
+  youngs_modulus: 1000 # MPa
+  poisson: 0.4
+  expansion: 1.0e-4    # 1/K
+shrinkage:
+  sink_volumetric: 0.06
+recommended_draft_deg: 1.0
